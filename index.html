@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7WL2XW1TP4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-7WL2XW1TP4');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bulls and Cows</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://unpkg.com/vue" defer></script>
+  <script src="app.js" defer></script>
+</head>
+
+<body>
+  <div id="app">
+    <div class="game">
+
+      <header>
+        <h1>Bulls and Cows</h1>
+      </header>
+
+      <div class="game-lobby" v-if="!isGameStarted">
+        <button @click="startNewGame()">Play</button>
+      </div>
+
+      <div v-if="isGameStarted" class="game-content">
+
+        <p>Guess the number: {{ isGameFinished ? secret.join("") : "*".repeat(secretLength) }} </p>
+
+        <div class="guess-history">
+          <ol>
+            <li v-for="(item, index) in history">
+              <strong>{{ item.guess }}</strong>: {{ item.result.bulls }}B {{ item.result.cows }}C
+            </li>
+          </ol>
+        </div>
+
+        <div class="guess-form">
+          <form @submit.prevent="">
+            <input :disabled="isGameFinished" ref="guess-input" v-model="guess" type="text" required size="5"
+              :maxlength="secretLength" placeholder="####" />
+            <button @click="confirmGuess" :disabled="!(isGuessValid) || isGameFinished">Guess</button>
+          </form>
+        </div>
+
+        <div class="game-finished" v-if="isGameFinished">
+          <p>You win! Turns: {{ history.length }}</p>
+          <button @click="startNewGame()">Play again</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
