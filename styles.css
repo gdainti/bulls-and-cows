@@ -33,3 +33,10 @@ input {
   margin: 0.5rem 0.2rem;
 
 }
+
+.game-rules {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+}

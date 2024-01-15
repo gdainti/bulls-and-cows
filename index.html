@@ -47,7 +47,7 @@
 
         <div class="guess-form">
           <form @submit.prevent="">
-            <input :disabled="isGameFinished" ref="guess-input" v-model="guess" type="text" required size="5"
+            <input :disabled="isGameFinished" ref="guess-input" v-model="guess" type="text" required :size="secretLength + 1"
               :maxlength="secretLength" placeholder="####" />
             <button @click="confirmGuess" :disabled="!(isGuessValid) || isGameFinished">Guess</button>
           </form>
@@ -59,6 +59,9 @@
         </div>
 
       </div>
+    </div>
+    <div class="game-rules">
+      <a target="_blank" href="https://en.wikipedia.org/wiki/Bulls_and_Cows">Wiki</a>
     </div>
   </div>
 </body>
